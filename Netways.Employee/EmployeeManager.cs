@@ -28,68 +28,56 @@ namespace Netways.Employee
         public Employee UpdateEmployee(List<Employee> employees, Employee employee)
 
         {
-
-            if (employees.Find(c => c.Id == employee.Id) != null) 
+            var updateEmployee = employees.FirstOrDefault(c => c.Id == employee.Id);
+            
+            if (updateEmployee != null)
             {
-                var updateEmployee = employees.FirstOrDefault(c => c.Id == employee.Id);
-                //employees.FirstOrDefault(c => c.Id == employee.Id) = employee;
-                if (updateEmployee != null)
+                updateEmployee.FirstName = employee.FirstName;
+                updateEmployee.LastName = employee.LastName;
+                updateEmployee.DateOfBirth = employee.DateOfBirth;
 
-                {
-
-                    employee.FirstName = updateEmployee.FirstName;
-                    employee.LastName = updateEmployee.LastName;
-                    employee.DateOfBirth = updateEmployee.DateOfBirth;
-
-                    int index = employees.IndexOf(employee);
-
-                    employees[index] = updateEmployee;
-
-
-                }
                 return employee;
-
             }
             return employee;
         }
 
 
-            /* var updateEmployee = employees.FirstOrDefault(c => c.Id == employee.Id);
-             if (updateEmployee != null)
+        /* var updateEmployee = employees.FirstOrDefault(c => c.Id == employee.Id);
+         if (updateEmployee != null)
 
-             {
+         {
 
-                 employee.FirstName = updateEmployee.FirstName;
-                 employee.LastName = updateEmployee.LastName;
-                 employee.DateOfBirth = updateEmployee.DateOfBirth;
-                 return employee;
+             employee.FirstName = updateEmployee.FirstName;
+             employee.LastName = updateEmployee.LastName;
+             employee.DateOfBirth = updateEmployee.DateOfBirth;
+             return employee;
 
-             }
-             else return employee;
+         }
+         else return employee;
 
-         }*/
+     }*/
 
 
-            public Employee RemoveEmployee(List<Employee> employees, Employee employee)
+        public Employee RemoveEmployee(List<Employee> employees, Employee employee)
 
+        {
+            var removeEmployee = employees.Find(ctx => ctx.Id == employee.Id);
+            if (removeEmployee != null)
             {
-                var removeEmployee = employees.Find(ctx => ctx.Id == employee.Id);
-                if (removeEmployee != null)
+                employees.Remove(removeEmployee);
+                int index = employees.IndexOf(employee);
+                if (index != -1)
                 {
-                    employees.Remove(removeEmployee);
-                    int index = employees.IndexOf(employee);
-                    if (index != -1)
-                    {
-                        employees[index] = removeEmployee;
-                    }
-                    return employee;
-
-
-
+                    employees[index] = removeEmployee;
                 }
-                else return employee;
+                return employee;
+
+
 
             }
+            else return employee;
 
         }
+
     }
+}

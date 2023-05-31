@@ -4,7 +4,16 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
 var mockGenerator = new DataRepository();
-var employeeManager = new EmployeeManager();
+
+var builder = new ContainerBuilder();
+builder.RegisterType<Employee>();
+builder.RegisterType<EmployeeManager>().AsSelf();
+IContainer container = builder.Build();
+container.Resolve<Employee>();
+container.Resolve<EmployeeManager>();
+var employeeManager = container.Resolve<EmployeeManager>();
+
+//var employeeManager = new EmployeeManager();
 //private IDataRepository dataRepository;
 
 
@@ -39,18 +48,9 @@ Console.WriteLine($"first name : {newListUpdateOfEmployee.FirstName},{newListUpd
 var newListDeleteOfemployee = employeeManager.RemoveEmployee(employees, new Employee(303, 101, "hanna", "nassar", DateTime.Now));
 Console.WriteLine(newListDeleteOfemployee.ToString());
 
-//var builder = new ContainerBuilder();
 
-//builder.RegisterType<Employee>();
 
-/*builder.RegisterType<EmployeeManager>().As<IEmployeeManager>();
+//var newListOfEmplyee = employeeManager1.AddEmployee(employees, new Employee(303, 101, "hanna", "nassar", DateTime.Now));
+//employeeManager1.PrintHelloMessage(newListOfEmplyee);
 
-IContainer container = builder.Build();
-container.Resolve<Employee>();
-//container.Resolve<EmployeeManager>();
-var employeeManager1 = container.Resolve<EmployeeManager>();
-
-var newListOfEmplyee = employeeManager1.AddEmployee(employees, new Employee(303, 101, "hanna", "nassar", DateTime.Now));
-employeeManager1.PrintHelloMessage(newListOfEmplyee);
-*/
 
