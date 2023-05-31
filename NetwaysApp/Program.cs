@@ -39,18 +39,18 @@ Console.WriteLine($"first name : {newListUpdateOfEmployee.FirstName},{newListUpd
 var newListDeleteOfemployee = employeeManager.RemoveEmployee(employees, new Employee(303, 101, "hanna", "nassar", DateTime.Now));
 Console.WriteLine(newListDeleteOfemployee.ToString());
 
-//var builder = new ContainerBuilder();
+var builder = new ContainerBuilder();
 
-//builder.RegisterType<Employee>();
+builder.RegisterType<Employee>();
 
-/*builder.RegisterType<EmployeeManager>().As<IEmployeeManager>();
+builder.RegisterType<EmployeeManager>().AsSelf();
 
 IContainer container = builder.Build();
 container.Resolve<Employee>();
-//container.Resolve<EmployeeManager>();
+container.Resolve<EmployeeManager>();
 var employeeManager1 = container.Resolve<EmployeeManager>();
 
-var newListOfEmplyee = employeeManager1.AddEmployee(employees, new Employee(303, 101, "hanna", "nassar", DateTime.Now));
-employeeManager1.PrintHelloMessage(newListOfEmplyee);
-*/
+//var newListOfEmplyee = employeeManager1.AddEmployee(employees, new Employee(303, 101, "hanna", "nassar", DateTime.Now));
+//employeeManager1.PrintHelloMessage(newListOfEmplyee);
+
 
